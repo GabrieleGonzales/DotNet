@@ -21,6 +21,11 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
+      displayName: TestLogin
+      inputs:
+        containerRegistry: 'mydocker'
+        command: login
+    - task: Docker@2
       displayName: Build an image
       inputs:
         containerRegistry: 'mydocker'
