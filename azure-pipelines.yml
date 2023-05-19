@@ -36,4 +36,4 @@ stages:
         - task: Docker@0
           inputs:
             containerRegistry: 'mydocker'
-            command: 'push'
+            command: 'docker push ggonzales/testedotnet:tagname'
