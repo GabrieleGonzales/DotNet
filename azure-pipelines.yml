@@ -27,3 +27,13 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/SimpleAPI/Dockerfile'
         tags: |
           $(tag)
+- stage: Install
+  displayName: Install on My Docker
+  jobs:
+    - job: Install
+      displayName: Intall on my docker job
+      steps:
+        - task: Docker@0
+          inputs:
+            containerRegistry: 'mydocker'
+            command: 'push'
