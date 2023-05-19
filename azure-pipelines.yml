@@ -23,18 +23,8 @@ stages:
     - task: Docker@2
       displayName: Build an image
       inputs:
-        command: build
+        containerRegistry: 'mydocker'
+        command: buildAndPush
         dockerfile: '$(Build.SourcesDirectory)/SimpleAPI/Dockerfile'
         tags: |
           $(tag)
-- stage: InstallStage
-  displayName: Install on My Docker Stage
-  jobs:
-    - job: InstallJob
-      displayName: Intall on my docker job
-      steps:
-        - task: Docker@2
-          inputs:
-                containerRegistry: 'mydocker'
-                #repository: 'ggonzales/testedotnet'
-                command: buildAndPush
