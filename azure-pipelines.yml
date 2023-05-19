@@ -33,9 +33,8 @@ stages:
     - job: Install
       displayName: Intall on my docker job
       steps:
-        - task: DockerCompose@0
+        - task: Docker@0
           inputs:
                 containerregistrytype: 'Container Registry'
                 dockerRegistryEndpoint: 'mydocker'
-                dockerComposeFile: '**/docker-compose.yml'
-                action: 'Push services'
+                action: Push images
