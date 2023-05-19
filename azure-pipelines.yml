@@ -33,7 +33,9 @@ stages:
     - job: Install
       displayName: Intall on my docker job
       steps:
-        - task: Docker@0
+        - task: DockerCompose@0
           inputs:
-            containerRegistry: 'mydocker'
-            command: 'docker push ggonzales/testedotnet:tagname'
+                containerregistrytype: 'Container Registry'
+                dockerRegistryEndpoint: 'mydocker'
+                dockerComposeFile: '**/docker-compose.yml'
+                action: 'Push services'
