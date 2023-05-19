@@ -29,6 +29,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'mydocker'
+        repository: 'ggonzales/testedotnet'
         command: buildAndPush
         dockerfile: '$(Build.SourcesDirectory)/SimpleAPI/Dockerfile'
         tags: |
