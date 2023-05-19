@@ -9,8 +9,8 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["SimpleAPI.csproj", "SimpleAPI/"]
 RUN dotnet restore "SimpleAPI/SimpleAPI.csproj"
-COPY . .
 WORKDIR "/src/SimpleAPI"
+COPY . .
 RUN dotnet build "SimpleAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
