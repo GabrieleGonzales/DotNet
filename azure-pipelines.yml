@@ -30,6 +30,8 @@ stages:
         tags: |
           $(tag)    
 - stage: Deploy
+  dependsOn:
+  - Build
   jobs:
   - deployment:
     displayName: Dev deploy
@@ -38,5 +40,7 @@ stages:
      runOnce:
        deploy:
          steps:
-           - script: echo Running in the Dev environment as deployment job
+           - script: docker pull ggonzales/testedotnet
+           - script: docker images 
+           - script: docker run ggonzales/testedotnet
              displayName: 'Dev based stage'
