@@ -34,3 +34,14 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/SimpleAPI/Dockerfile'
         tags: |
           $(tag)
+
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'vmtest'
+        runOptions: 'commands'
+        commands: |
+          docker pull ggonzales/testedotnet:41
+          docker images
+          docker run -it ubuntu
+        readyTimeout: '20000'
+      
