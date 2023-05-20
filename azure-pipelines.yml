@@ -40,7 +40,7 @@ stages:
      runOnce:
        deploy:
          steps:
-           - script: docker pull ggonzales/testedotnet
+           - script: docker pull ggonzales/testedotnet:$(tag)
            - script: docker images 
-           - script: docker run ggonzales/testedotnet
+           - script: docker run ggonzales/testedotnet:$(tag)
              displayName: 'Dev based stage'
