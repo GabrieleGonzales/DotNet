@@ -21,11 +21,6 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: TestLogin
-      inputs:
-        containerRegistry: 'mydocker'
-        command: login
-    - task: Docker@2
       displayName: Build an image
       inputs:
         containerRegistry: 'mydocker'
@@ -33,18 +28,15 @@ stages:
         command: buildAndPush
         dockerfile: '$(Build.SourcesDirectory)/SimpleAPI/Dockerfile'
         tags: |
-          $(tag)
-    - task: InstallSSHKey@0
-      inputs:
-        knownHostsEntry: '20.127.108.176 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBNcYiZotoT1ZQXm5EYRyxPVfQhgKPWuaUyKiaewo7qawoAB5IvlG6h9mbKrD/a1YttbPA4aCK3WEjuX5Nz8hcBM='
-        sshKeySecureFile: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbvA/BZX7DdR9YEZmQaaneOu3bPxWeucodaAzUVcc/1EB9XZVu+Y8vsYTGj/4CuQtM5F9D/ReUSKrk0nmhs72XNw2ASUBhRR9dbr2jUsP81QJvfREyUEsfB/knkvm1J4ly3KZewaJvfrXe6WTYxiU6s4x7HqzSQXjzfyhF4I035LyCR7AEDwaRkP3ux5xJe/TZ4A7bYndz1ZbycRU3FLZ0yu7lnkwspT9ioG8HgomhQl2bvhABc36KEuWJOFSsh1fYw+T+i4qNbLrayAGcD5yXppFtuQZy68INEvi6bV9pl1yPB/4Nr2Rxc5sVFL0U26aVrLX1wbTVC232KXpM5Bb1UMCk7kXEZ/yIcMVL1uZjXi7GD/dOQaS0HnfFjgLIQoJGuv/dxjBzehE5PIrBqyK+WdXJA4i8Vg5A88Pv25QhLTVwXl2MRAWaZNC9xxtxoQJOOfDSemFwNjig+f3E2tefRCqbBBYHr/qGi6B5BgjUburD8XwwwS5y10JVLrR4peE= Gabriele@DESKTOP-1AIRT9Q'
-    - task: SSH@0
-      inputs:
-        sshEndpoint: 'vmtest'
-        runOptions: 'commands'
-        commands: |
-          docker pull ggonzales/testedotnet:41
-          docker images
-          docker run -it ubuntu
-        readyTimeout: '20000'
-      
+          $(tag)    
+- stage: Deploy
+  jobs:
+  - deployment:
+    displayName: Dev deploy
+    environment: Dev
+    strategy:
+     runOnce:
+       deploy:
+         steps:
+           - script: echo Running in the Dev environment as deployment job
+             displayName: 'Dev based stage'
