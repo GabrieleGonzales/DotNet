@@ -38,7 +38,7 @@ stages:
     environment: 
      name: Dev
      resourceType: VirtualMachine
-     tags: testevmdotnet
+     tags: dev
     strategy:
      runOnce:
        deploy:
