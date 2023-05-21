@@ -35,7 +35,10 @@ stages:
   jobs:
   - deployment:
     displayName: Dev deploy
-    environment: Dev
+    environment: 
+     name: Dev
+     resourceType: VirtualMachine
+     tags: testevmdotnet
     strategy:
      runOnce:
        deploy:
