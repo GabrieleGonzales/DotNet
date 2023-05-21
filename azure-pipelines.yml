@@ -47,5 +47,5 @@ stages:
            #   img=`sudo docker images | grep -i testedotnet | grep $(tag) | awk '{print $3}'`
            #   docker run -d ${img}
            #- script: docker run -d ggonzales/testedotnet:$(tag)
-           - script: docker run -d -p 80:80-p 443:443 ggonzales/testedotnet:$(tag) --name "test-please-work"
+           - script: docker run -d -p 80:80 -p 443:443 ggonzales/testedotnet:$(tag) --name "test-please-work"
              displayName: 'Dev based stage'
