@@ -53,3 +53,8 @@ stages:
            #- script: docker run -d ggonzales/testedotnet:$(tag)
            - script: sudo docker run -d -p 80:80 -p 443:443 ggonzales/testedotnet:$(tag) --name "test-please-work"
              displayName: 'Dev based stage'
+           - task: DownloadBuildArtifacts@1
+             inputs:
+               buildType: 'current'
+               downloadType: 'single'
+               downloadPath: '$(System.ArtifactsDirectory)'
