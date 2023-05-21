@@ -45,11 +45,11 @@ stages:
          steps:
            - script: hostname
            - script: sudo docker ps -aq | xargs --no-run-if-empty sudo docker stop | xargs --no-run-if-empty sudo docker rm
-           - script: docker pull ggonzales/testedotnet:$(tag)
-           - script: docker images 
+           - script: sudo docker pull ggonzales/testedotnet:$(tag)
+           - script: sudo docker images 
            #- script: |
            #   img=`sudo docker images | grep -i testedotnet | grep $(tag) | awk '{print $3}'`
            #   docker run -d ${img}
            #- script: docker run -d ggonzales/testedotnet:$(tag)
-           - script: docker run -d -p 80:80 -p 443:443 ggonzales/testedotnet:$(tag) --name "test-please-work"
+           - script: sudo docker run -d -p 80:80 -p 443:443 ggonzales/testedotnet:$(tag) --name "test-please-work"
              displayName: 'Dev based stage'
