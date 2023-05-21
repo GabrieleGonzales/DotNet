@@ -40,6 +40,7 @@ stages:
      runOnce:
        deploy:
          steps:
+           - script: hostname
            - script: sudo docker ps -aq | xargs --no-run-if-empty sudo docker stop | xargs --no-run-if-empty sudo docker rm
            - script: docker pull ggonzales/testedotnet:$(tag)
            - script: docker images 
