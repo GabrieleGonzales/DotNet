@@ -62,7 +62,7 @@ stages:
            - task: PublishPipelineArtifact@1
              inputs:
               targetPath: '$(Pipeline.Workspace)'
-              artifact: 'testedotnet*tar'
+              artifact: 'testedotnet.$(tag).tar'
               publishLocation: 'pipeline'
            - task: DownloadBuildArtifacts@1
              inputs:
