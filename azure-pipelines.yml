@@ -47,26 +47,22 @@ stages:
            - script: sudo docker ps -aq | xargs --no-run-if-empty sudo docker stop | xargs --no-run-if-empty sudo docker rm
            - script: sudo docker pull ggonzales/testedotnet:$(tag)
            - script: sudo docker images 
-           #- script: |
-           #   img=`sudo docker images | grep -i testedotnet | grep $(tag) | awk '{print $3}'`
-           #   docker run -d ${img}
-           #- script: docker run -d ggonzales/testedotnet:$(tag)
            - script: sudo docker run -d -p 80:80 -p 443:443 ggonzales/testedotnet:$(tag) --name "test-please-work"
            - script: sudo docker save ggonzales/testedotnet:$(tag) | gzip > testedotnet.tar.gz
              displayName: 'Dev based stage'
-           - task: DownloadPipelineArtifact@2
-             inputs:
-               buildType: 'current'
-               targetPath: '$(Pipeline.Workspace)'
+           #- task: DownloadPipelineArtifact@2
+            # inputs:
+             #  buildType: 'current'
+              # targetPath: '$(Pipeline.Workspace)'
            
            - task: PublishPipelineArtifact@1
              inputs:
               targetPath: '$(Pipeline.Workspace)'
               artifact: 'testedotnet.tar.gz'
               publishLocation: 'pipeline'
-           - task: DownloadBuildArtifacts@1
-             inputs:
-              buildType: 'current'
-              downloadType: 'specific'
-              itemPattern: 'testedotnet*tar'
-              downloadPath: '$(System.ArtifactsDirectory)'
+           #- task: DownloadBuildArtifacts@1
+            # inputs:
+             # buildType: 'current'
+              #downloadType: 'specific'
+              #itemPattern: 'testedotnet*tar'
+              #downloadPath: '$(System.ArtifactsDirectory)'
