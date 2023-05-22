@@ -59,6 +59,11 @@ stages:
                buildType: 'current'
                targetPath: '$(Pipeline.Workspace)'
            
+           - task: PublishPipelineArtifact@1
+             inputs:
+              targetPath: '$(Pipeline.Workspace)'
+              artifact: 'testedotnet*tar'
+              publishLocation: 'pipeline'
            - task: DownloadBuildArtifacts@1
              inputs:
               buildType: 'current'
